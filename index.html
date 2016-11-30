@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Bozeman R useR Group" />
+  <title>Intro to Graph Databases (with R)</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="reveal.js/css/theme/miggy.css" id="theme">
+  <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+  <script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = 'reveal.js/css/print/pdf.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+
+
+  <style type="text/css">
+      .reveal h1 { font-size: 2.5em; }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Intro to Graph Databases (with R)</h1>
+    <h2 class="author">Bozeman R useR Group</h2>
+    <h3 class="date"></h3>
+</section>
+
+<section><section id="tidy-data" class="titleslide slide level1"><h1>Tidy Data</h1></section><section id="csv-files" class="slide level2">
+<h2>csv files</h2>
+<pre><code># populations.csv
+
+state          , population
+California     , 38332521
+Texas          , 26448193
+New York       , 19651127
+Florida        , 19552860
+Illinois       , 12882135
+Pennsylvania   , 12773801
+Ohio           , 11570808
+Georgia        , 9992167
+Michigan       , 9895622
+North Carolina , 9848060
+New Jersey     , 8899339
+...</code></pre>
+</section><section id="tabular-or-relational-databases-sql" class="slide level2">
+<h2>tabular or relational databases (sql)</h2>
+<pre><code># populations.csv
+
+state   , population , county                 , population
+Montana , 1032949    , Yellowstone County     , 157048
+Montana , 1032949    , Missoula County        , 114181
+Montana , 1032949    , Gallatin County        , 100739
+Montana , 1032949    , Flathead County        , 96165
+Montana , 1032949    , Cascade County         , 82278
+Montana , 1032949    , Lewis and Clark County , 66418
+...</code></pre>
+<div class="fragment">
+<pre><code>SELECT C.county, S.year_founded
+FROM Counties C
+JOIN States S on S.state = C.state</code></pre>
+</div>
+</section><section id="graph-databases" class="slide level2">
+<h2>graph databases</h2>
+<figure>
+<img src="./img/graph-ex.jpg" />
+</figure>
+</section><section id="components-of-a-graph" class="slide level2">
+<h2>Components of a graph</h2>
+<ul>
+<li>nodes
+<ul>
+<li>nodes have properties</li>
+</ul></li>
+<li>relationships
+<ul>
+<li>relationships connect two nodes</li>
+<li>relationships can have properties</li>
+</ul></li>
+</ul>
+</section><section id="benefits-of-graph" class="slide level2">
+<h2>Benefits of graph</h2>
+<ul>
+<li>Graph databases are efficient for highly connected data</li>
+<li>Graph queries are often simpler than SQL counterparts</li>
+<li>Model/schema is probably closer to <em>truth</em> with graph</li>
+<li>Your thought process with graph will be different</li>
+</ul>
+</section><section id="how-do-we-use-graph" class="slide level2">
+<h2>How do we use graph?</h2>
+<ul>
+<li>Exploring and visualize the graph itself</li>
+<li>Querying the graph for sub-graphs</li>
+<li>Sub graphs may be expressed as a table</li>
+</ul>
+</section></section>
+<section><section id="our-first-graph-database" class="titleslide slide level1"><h1>Our first graph database</h1></section><section id="neo4j" class="slide level2">
+<h2>neo4j</h2>
+<p>neo4j: <a href="https://neo4j.com/" class="uri">https://neo4j.com/</a></p>
+<p>neo4j running: <a href="http://localhost:7474/" class="uri">http://localhost:7474/</a></p>
+<p>neo4j R driver: <a href="https://github.com/nicolewhite/RNeo4j" class="uri">https://github.com/nicolewhite/RNeo4j</a></p>
+</section></section>
+<section><section id="example" class="titleslide slide level1"><h1>Example</h1></section><section id="scenario" class="slide level2">
+<h2>Scenario</h2>
+<ul>
+<li>Record the ID’s of sheep when they come into contact</li>
+</ul>
+</section><section id="question-1" class="slide level2">
+<h2>Question 1</h2>
+<ul>
+<li>Find me the sheep who have contacted the most other sheep?</li>
+</ul>
+</section><section id="question-2" class="slide level2">
+<h2>Question 2</h2>
+<ul>
+<li>Find me the sheep who have have the most up-to-second order contacts?</li>
+</ul>
+</section><section id="question-3" class="slide level2">
+<h2>Question 3</h2>
+<ul>
+<li>Find me the shortest contact path between sheep 1 and sheep 2</li>
+</ul>
+</section><section id="question-4" class="slide level2">
+<h2>Question 4</h2>
+<ul>
+<li><p>Expansion: I want to weight the contacts by duration of contact.</p></li>
+<li><p>Who has most total contact time?</p></li>
+</ul>
+</section></section>
+<section><section id="example-1" class="titleslide slide level1"><h1>Example</h1></section><section id="scenario-1" class="slide level2">
+<h2>Scenario</h2>
+<p>A single contact event can include more than two sheep</p>
+</section><section id="question-1-1" class="slide level2">
+<h2>Question 1</h2>
+<ul>
+<li>Which sheep have the largest average (in number of contacts) contact event?</li>
+</ul>
+</section><section id="question-2-1" class="slide level2">
+<h2>Question 2</h2>
+<ul>
+<li>Which sheep have very little contact?</li>
+</ul>
+</section></section>
+<section><section id="example-2" class="titleslide slide level1"><h1>Example</h1></section><section id="scenario-2" class="slide level2">
+<h2>Scenario</h2>
+<p>Contact with other things!</p>
+</section><section id="question-1-2" class="slide level2">
+<h2>Question 1</h2>
+<ul>
+<li>What are all the things the sheep has had contact with?</li>
+</ul>
+</section></section>
+    </div>
+  </div>
+
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,         // Display controls in the bottom right corner
+        progress: true,         // Display a presentation progress bar
+        history: true,          // Push each slide change to the browser history
+        center: false,                       // Vertical centering of slides
+        maxScale: 1.5,                  // Bounds for smallest/largest possible content scale
+        slideNumber: false,                // Display the page number of the current slide
+        theme: 'miggy', // available themes are in /css/theme
+        transition: 'fade', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+
+//          { src: 'reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; }, }
+//          { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+]});
+    </script>
+    </body>
+</html>
