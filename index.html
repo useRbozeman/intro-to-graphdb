@@ -105,7 +105,7 @@ JOIN States S on S.state = C.state</code></pre>
 <ul>
 <li>Exploring and visualize the graph itself</li>
 <li>Querying the graph for sub-graphs</li>
-<li>Sub graphs may be expressed as a table</li>
+<li>Sub-graphs may be expressed as a table</li>
 </ul>
 </section></section>
 <section><section id="our-first-graph-database" class="titleslide slide level1"><h1>Our first graph database</h1></section><section id="neo4j" class="slide level2">
@@ -113,12 +113,17 @@ JOIN States S on S.state = C.state</code></pre>
 <p>neo4j: <a href="https://neo4j.com/" class="uri">https://neo4j.com/</a></p>
 <p>neo4j running: <a href="http://localhost:7474/" class="uri">http://localhost:7474/</a></p>
 <p>neo4j R driver: <a href="https://github.com/nicolewhite/RNeo4j" class="uri">https://github.com/nicolewhite/RNeo4j</a></p>
+<p>neo4j cypher documentation: <a href="https://neo4j.com/docs/developer-manual/current/cypher/" class="uri">https://neo4j.com/docs/developer-manual/current/cypher/</a></p>
 </section></section>
 <section><section id="example" class="titleslide slide level1"><h1>Example</h1></section><section id="scenario" class="slide level2">
 <h2>Scenario</h2>
 <ul>
 <li>Record the ID’s of sheep when they come into contact</li>
 </ul>
+<div class="fragment">
+<p><a href="http://github.com/useRbozeman/intro-to-graphdb">github.com/useRbozeman/intro-to-graphdb</a></p>
+<p>data &gt; contacts.csv</p>
+</div>
 </section><section id="question-1" class="slide level2">
 <h2>Question 1</h2>
 <ul>
@@ -140,10 +145,16 @@ JOIN States S on S.state = C.state</code></pre>
 <li><p>Expansion: I want to weight the contacts by duration of contact.</p></li>
 <li><p>Who has most total contact time?</p></li>
 </ul>
+<p><a href="http://github.com/useRbozeman/intro-to-graphdb">github.com/useRbozeman/intro-to-graphdb</a></p>
+<p>data &gt; graph1.csv</p>
 </section></section>
 <section><section id="example-1" class="titleslide slide level1"><h1>Example</h1></section><section id="scenario-1" class="slide level2">
 <h2>Scenario</h2>
 <p>A single contact event can include more than two sheep</p>
+<div class="fragment">
+<p><a href="http://github.com/useRbozeman/intro-to-graphdb">github.com/useRbozeman/intro-to-graphdb</a></p>
+<p>data &gt; graph2.csv</p>
+</div>
 </section><section id="question-1-1" class="slide level2">
 <h2>Question 1</h2>
 <ul>

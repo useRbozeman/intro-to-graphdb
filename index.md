@@ -80,12 +80,13 @@ Benefits of graph
 - Model/schema is probably closer to _truth_ with graph
 - Your thought process with graph will be different
 
+
 How do we use graph?
 --------------------
 
 - Exploring and visualize the graph itself
 - Querying the graph for sub-graphs
-- Sub graphs may be expressed as a table
+- Sub-graphs may be expressed as a table
 
 
 Our first graph database
@@ -100,6 +101,9 @@ neo4j running: [http://localhost:7474/](http://localhost:7474/)
 
 neo4j R driver: [https://github.com/nicolewhite/RNeo4j](https://github.com/nicolewhite/RNeo4j)
 
+neo4j cypher documentation:
+[https://neo4j.com/docs/developer-manual/current/cypher/](https://neo4j.com/docs/developer-manual/current/cypher/)
+
 
 Example
 =======
@@ -108,6 +112,12 @@ Scenario
 --------
 
 - Record the ID's of sheep when they come into contact
+
+. . .
+
+[github.com/useRbozeman/intro-to-graphdb](http://github.com/useRbozeman/intro-to-graphdb)
+
+data > contacts.csv
 
 
 Question 1
@@ -132,6 +142,11 @@ Question 4
 
 - Who has most total contact time?
 
+[github.com/useRbozeman/intro-to-graphdb](http://github.com/useRbozeman/intro-to-graphdb)
+
+data > graph1.csv
+
+
 Example
 =======
 
@@ -139,6 +154,12 @@ Scenario
 --------
 
 A single contact event can include more than two sheep
+
+. . .
+
+[github.com/useRbozeman/intro-to-graphdb](http://github.com/useRbozeman/intro-to-graphdb)
+
+data > graph2.csv
 
 Question 1
 ----------
